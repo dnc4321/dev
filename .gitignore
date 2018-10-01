@@ -1,0 +1,4 @@
+./cc/bin/*
+./java/*.class
+./py/*.pyc
+./c/bin/*
