@@ -1,0 +1,4 @@
+#!/bin/bash
+back
+pkill urxvtd
+sudo systemctl poweroff

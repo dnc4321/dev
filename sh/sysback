@@ -1,0 +1,2 @@
+#!/bin/bash
+rsync -aAXrv --delete --exclude={"/home/rohan/Downloads/*","/var/cache/pacman/pkg/*","/home/rohan/.gvfs","/home/rohan/.cache/*","/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","/mnt/*","/media/*","/lost+found"} / /run/media/rohan/ARCH_BK/
