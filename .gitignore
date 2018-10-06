@@ -1,4 +1,4 @@
 ./cc/bin/*
-./java/*.class
+./java/bin/*
 ./py/*.pyc
 ./c/bin/*
