@@ -1,0 +1,12 @@
+#!/bin/bash
+user=bishnumoy_ss
+pass=19216856123
+base="http://192.168.183.201:9087/Kolkata18/SRISTI"
+login_url="$base/Login.jsp"
+auth_url=http://2.2.2.2/login
+
+curl -sS -c wishnet.cookie $login_url > /dev/null
+curl -sS -X POST -c wishnet.cookie -d username=$user -d password=$pass $auth_url > /dev/null
+ping google.com
+
+rm wishnet.cookie
