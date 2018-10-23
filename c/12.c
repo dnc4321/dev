@@ -13,6 +13,6 @@ int main(int argc, char const *argv[]){
         sum+=arr[i];
     }
     printf("SUM: %d\nAVG: %f\n",sum,(float)sum/n);
-    printf("\n", );
+    printf("\n");
     return 0;
 }
