@@ -1,3 +1,4 @@
+./c/bin/*
 ./cc/bin/*
 ./java/bin/*
 ./py/*.pyc
