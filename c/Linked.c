@@ -19,6 +19,10 @@ int main(int argc, char const *argv[]){
 	return 0;
 }
 
-void p(NODE n){
-	printf("%d\n",n->val);
+void create(NODE n){
+	NODE tmp=n;
+	while(tmp->next!=NULL){
+		tmp=tmp->next;
+	}
+	
 }
