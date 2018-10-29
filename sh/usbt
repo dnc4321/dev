@@ -1,3 +1,0 @@
-#!/bin/bash
-ip link set enp0s20u12 up
-dhcpcd enp0s20u12

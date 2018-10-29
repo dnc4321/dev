@@ -4,10 +4,9 @@
 int q[10]={1,2,3},f=-1,r=-1,tmp=0,ch=0;
 
 bool insert(int);
-bool delete();
+bool del();
 
-int main(int argc, char const *argv[])
-{
+int main(int argc, char const *argv[]){
     re:
     printf("\n--------MENU--------\n");
     printf("1 - Insert \n2 - Delete \n3 - Display \n4 - First \n0 - Exit\n>>");
@@ -25,7 +24,7 @@ int main(int argc, char const *argv[])
 
         case 2:
             tmp=q[f];
-            if(delete())
+            if(del())
                 printf("Deleted %d",tmp);
             else
                 printf("Underflow");
@@ -65,7 +64,7 @@ bool insert(int n){
     }
     return true;
 }
-bool delete(){
+bool del(){
     if(f<r)
         f++;
     else if(f==r&&f!=-1&&r!=-1){
