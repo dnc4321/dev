@@ -6,18 +6,54 @@ struct node
 	int val;
 	struct node *next;
 };
-
 typedef struct node *NODE;
+
+NODE head=NULL;
+
+// Function Prototypes
+void create(int n);
+void display();
+
 int main(void){
-    NODE n1=(NODE)malloc(sizeof(NODE));
-    n1->next=(NODE)malloc(sizeof(NODE));
-    n1->next->val=5;
+    printf("Enter any number \n");
+    int n;
+    for(;;){
+        scanf("%d",&n);
+        if(n<1){
+            break;
+        }
+        create(n);
+    }
+    display();
     return 0;
 }
 
-void create(NODE n){
-    NODE tmp=n;
-    while(tmp->next!=NULL){
-        tmp=tmp->next;
+void create(int n){
+    NODE tmp=(NODE)malloc(sizeof(NODE));
+    tmp->val=n;
+    tmp->next=NULL;
+
+    if(head==NULL){
+        head=tmp;
+    }else{
+        NODE p=head;
+        while(p->next!=NULL){
+            p=p->next;
+        }
+        p->next=tmp;
     }
+}
+
+void display(){
+    NODE n=head;
+    if(n==NULL){
+        printf("List is Empty\n");
+    }else{
+        while(n->next!=NULL){
+            printf("%d ",n->val);
+            n=n->next;
+        }
+        printf("%d",n->val);
+    }
+    printf("\n");
 }
