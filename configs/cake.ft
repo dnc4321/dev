@@ -1,6 +1,0 @@
-/*  Feature List  */
--l                      [Fileist.txt]
--c                      [SingleFile.c]
--d                      [Delete executable]
--s --scan               [Scan for .c files]
--b --build              [Just build Project]
