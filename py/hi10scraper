@@ -1,0 +1,73 @@
+#!/usr/bin/python3
+from bs4 import BeautifulSoup
+import sys
+
+# Functions
+def _dflags():
+    _dflags_list = []
+    for item in sys.argv:
+        if ('-' in item) and ('--' not in item):
+            _dflags_list.append(item.replace('-',''))
+    return list(set(_dflags_list))
+
+
+# Filter the link from unwanted shitty redirects
+def _filter(_src = ''):
+    _src = _src.replace('https://linkshrink.net/z647=','')
+    _src = _src.replace('http://linkshrink.net/z647=','')
+    _src = _src.replace('https://www.spaste.com/r/lhb7fn?link=','')
+    _src = _src.replace('http://www.spaste.com/r/lhb7fn?link=','')
+    _src = _src.replace('https://ouo.io/s/166CefdX?s=','')
+    _src = _src.replace('http://ouo.io/s/166CefdX?s=','')
+    _src = _src.replace('https://adf.ly/14674075/','')
+    _src = _src.replace('http://adf.ly/14674075/','')
+    return _src
+
+# Filter the link lisk into a beautiful 'soup'
+def _filter_list(_src_list = []):
+    _ret_list = []
+    for item in _src_list:
+        _tmp = _filter(item)
+        _ret_list.append(_tmp)
+    _ret_list = list(set(_ret_list))
+    _ret_list.sort()
+    return _ret_list
+
+
+# Commandline args processing
+if (len(sys.argv) < 2) or ('h' in _dflags()):
+    print('Usage: ' + sys.argv[0] + ' <output-filename>')
+    exit(1)
+
+# Visual confirmation for user
+print('Loading source...')
+
+# Open the source file and read it
+with open ('/home/rohan/Source.html', 'r') as infile:
+    data=infile.read().replace('\n',' ')
+
+# Create BeautifulSoup object and 'link' list use LXML!!!!
+soup = BeautifulSoup(data,'lxml')
+links = []
+
+print('Done!')
+
+print ('Collecting and filtering links...')
+
+# Collect the links into list and filter them
+for link in soup.find_all('a',href=True):
+    link = link.get('href')
+    if '.mkv' in link:
+        links.append(link)
+links = _filter_list(links)
+
+print('Done!')
+
+# Open the output file and write the 'links' into it
+outfile = '/home/rohan/links/' + sys.argv[1] 
+with open(outfile,'w') as out:
+    for link in links:
+        out.write("%s\n" %link)
+
+# Visual confirmation for user
+print('File Written to ',outfile)

@@ -55,14 +55,9 @@ else:
     print('No files specified')
     exit(1)
 _exec += _get_args('-a')
-
-print(_comp)
-print(_exec)
-if 'd' not in _dflags_list:
-    print(_del)
 if call(_comp) is 0:
-    print('[DEBUG] Executed \'_comp\'')
+    print('Compiling...done')
     if (call(_exec) is 0) and ('d' not in _dflags_list):
-        print('[DEBUG] Executed \'_exec\'')
+        print('Executing...done')
         call(_del)
-        print('[DEBUG] Executed \'_del\'')
+        print('Deleting...done')
