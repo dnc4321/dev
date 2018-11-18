@@ -1,14 +1,8 @@
 #!/usr/bin/python3
 from bs4 import BeautifulSoup
+import pickle
+import requests
 import sys
-
-# Functions
-def _dflags():
-    _dflags_list = []
-    for item in sys.argv:
-        if ('-' in item) and ('--' not in item):
-            _dflags_list.append(item.replace('-',''))
-    return list(set(_dflags_list))
 
 
 # Filter the link from unwanted shitty redirects
@@ -23,6 +17,7 @@ def _filter(_src = ''):
     _src = _src.replace('http://adf.ly/14674075/','')
     return _src
 
+
 # Filter the link lisk into a beautiful 'soup'
 def _filter_list(_src_list = []):
     _ret_list = []
@@ -35,39 +30,52 @@ def _filter_list(_src_list = []):
 
 
 # Commandline args processing
-if (len(sys.argv) < 2) or ('h' in _dflags()):
-    print('Usage: ' + sys.argv[0] + ' <output-filename>')
+if (len(sys.argv) < 3) or (len(sys.argv)>3):
+    print('Usage: ' + sys.argv[0] + ' <output-filename> <page-url>')
     exit(1)
 
-# Visual confirmation for user
-print('Loading source...')
+# Starting requests session
+session = requests.Session()
 
-# Open the source file and read it
-with open ('/home/rohan/Source.html', 'r') as infile:
-    data=infile.read().replace('\n',' ')
+# Loading saved cookies with pickle
+print('Loading cookies...',end = '')
+try:
+    cookies = pickle.load(open('/home/rohan/dev/hi10.cookies','rb'))
+except:
+    print('Error!\nCookie file is corrupted or not present...\nPlease generate cookie file...')
+    exit(1)
 
-# Create BeautifulSoup object and 'link' list use LXML!!!!
-soup = BeautifulSoup(data,'lxml')
-links = []
-
+for cookie in cookies:
+    session.cookies.set(cookie['name'], cookie['value'])
 print('Done!')
 
-print ('Collecting and filtering links...')
+# Getting response from server with cookies
+print('Requesting server for content...',end = '')
+try:
+    data = session.get(sys.argv[2]).content
+except:
+    print('Error!\nError trying to get page content...')
+    exit(1)
+print('Done!')
+
+# Dumping response into BeautifulSoup
+print('Loading BeautifulSoup Module...',end = '')
+soup = BeautifulSoup(data,'lxml')
+links = []
+print('Done!')
 
 # Collect the links into list and filter them
+print ('Collecting and filtering links...',end = '')
 for link in soup.find_all('a',href=True):
     link = link.get('href')
-    if '.mkv' in link:
+    if ('.mkv' in link) and ('.torrent' not in link):
         links.append(link)
 links = _filter_list(links)
-
 print('Done!')
 
 # Open the output file and write the 'links' into it
-outfile = '/home/rohan/links/' + sys.argv[1] 
+outfile = '/home/rohan/links/' + sys.argv[1] + '.list' 
 with open(outfile,'w') as out:
     for link in links:
         out.write("%s\n" %link)
-
-# Visual confirmation for user
-print('File Written to ',outfile)
+print('File Written to',outfile)
