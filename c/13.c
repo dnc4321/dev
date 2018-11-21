@@ -1,19 +1,21 @@
-#include<stdio.h>
-int main(){
-    int min,max,n=0,i=0;
-    printf("Enter N: ");
-    scanf("%d",&n);
-    int arr[n];
-    printf("Enter the numbers:\n");
-    for(i=0;i<n;i++)
-        scanf("%d",&arr[i]);
-    max=arr[0];
-    min=arr[0];
-    for(i=0;i<n;i++){
-        if(arr[i]>max)
-            max=arr[i];
-        if(arr[i]<min)
-            min=arr[i];
-    }
-    printf("MAX: %d\nMIN: %d\n",max,min);
+#include <stdio.h>
+
+int main(int argc, char const *argv[]){
+	int size;
+	int max,min;
+	printf("ENTER NUMBER of NUMBERS\n");
+	scanf("%d",&size);
+	int n[size];
+	printf("ENTER THE NUMBERS\n");
+	for(int i=0;i<size;i++)
+		scanf("%d",&n[i]);
+	max=n[0];min=n[0];
+	for(int i=0;i<size;++i){
+		if(n[i]>max)
+			max=n[i];
+		if(n[i]<min)
+			min=n[i];
+	}
+	printf("MAX:\t%d\nMIN:\t%d\n",max,min);
+	return 0;
 }
