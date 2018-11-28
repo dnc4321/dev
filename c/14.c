@@ -1,7 +1,5 @@
-#include<stdio.h>
-#include<string.h>
-#include<stdlib.h>
-int main(){
+#include <stdio.h>
+int main(void){
     int dec,bin=0,base=1,i=0;
     printf("Enter a number: ");
     scanf("%d",&dec);

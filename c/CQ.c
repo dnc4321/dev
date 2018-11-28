@@ -4,10 +4,9 @@ int f=-1,r=-1,c=0,q[10],tmp;
 
 int insert(int);
 int delete();
-void test();
 void display();
 
-int main(int argc, char const *argv[]){
+int main(void){
     re:
     printf("\n--------MENU--------\n");
     printf("1 - Insert\n2 - Delete\n3 - Display\n0 - Quit\n>>");

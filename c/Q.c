@@ -6,7 +6,7 @@ int q[10]={1,2,3},f=-1,r=-1,tmp=0,ch=0;
 bool insert(int);
 bool del();
 
-int main(int argc, char const *argv[]){
+int main(void){
     re:
     printf("\n--------MENU--------\n");
     printf("1 - Insert \n2 - Delete \n3 - Display \n4 - First \n0 - Exit\n>>");
@@ -21,7 +21,6 @@ int main(int argc, char const *argv[]){
             else
                 printf("Overflow");
             goto re;
-
         case 2:
             tmp=q[f];
             if(del())
@@ -29,7 +28,6 @@ int main(int argc, char const *argv[]){
             else
                 printf("Underflow");
             goto re;
-
         case 3:
             if(r==-1&&f==-1)
                 printf("Empty Queue");
