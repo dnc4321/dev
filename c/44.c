@@ -10,14 +10,12 @@ int getWords(char str[]){
     }
     return count;
 }
-
 int isAlphabet(char c){
     if((c>='a'&&c<='z')||(c>='A'&&c<='Z'))
         return 1;
     else
         return 0;
 }
-
 int getAlpha(char str[]){
     int i=0,count=0;
     while(str[i]!='\0'){
@@ -27,7 +25,15 @@ int getAlpha(char str[]){
     }
     return count;
 }
-
+int getLines(char str[]){
+    int i=0,count=0;
+    while(str[i]!='\0'){
+        if(str[i]=='\n')
+            count++;
+        i++;
+    }
+    return count+1;
+}
 int len(char str[]){
     int count=0;
     while(str[count]!='\0'){
@@ -35,13 +41,13 @@ int len(char str[]){
     }
     return count;
 }
-
 int main(void){
     char str[100];
     printf("Enter a string: ");
     gets(str);
-    printf("Words: %d\n",getWords(str));
+    printf("Total words: %d\n",getWords(str));
     printf("Total length: %d\n",len(str));
     printf("Total alphabets: %d\n",getAlpha(str));
+    printf("Total lines: %d\n",getLines(str));
     return 0;
 }
