@@ -1,14 +1,21 @@
 #include <stdio.h>
 
-int main(void){
-    char ch;
-    printf("Enter character: ");
-    scanf("%c",&ch);
+char up(char ch){
     if(ch>='a'&&ch<='z'){
         ch=ch-32;
-        printf("Uppercase: %c\n",ch);
-        return 0;
+        return ch;
     }
-    printf("Not a lowercase character\n");
-    return 1;
+    return ch;
+}
+
+int main(void){
+    printf("Enter a string: ");
+    char str[50];
+    int i=0;
+    gets(str);
+    while(str[i]!='\0'){
+        str[i]=up(str[i]);
+        ++i;
+    }
+    printf("%s\n",str);
 }
