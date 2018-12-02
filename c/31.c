@@ -1,22 +1,23 @@
-#include <stdio.h>
- 
-int main(void){
-    long dec, q, r;
-    int i, j = 0;
-    char hex[100];
-    printf("Enter decimal number: ");
-    scanf("%ld", &dec);
-    q = dec;
-    while (q != 0){
-        r = q % 16;
-        if (r < 10)
-            hex[j++] = 48 + r;
-        else
-            hex[j++] = 55 + r;
-        q = q / 16;
+#include<stdio.h>
+
+void Dec2Hex(int no){
+    int hex=0;
+    if(!no)
+        return;
+    else{
+        hex=no%16;
+        Dec2Hex(no/16);
     }
-    for (i = j; i >= 0; i--)
-        printf("%c", hex[i]);
-    printf("\n");
+    if(hex>9)
+        printf("%c",'A'+(hex-10));
+    else
+        printf("%d",hex);
+}
+
+int main(){
+    int k=0;
+    printf("Enter no:");
+    scanf("%d",&k);
+    Dec2Hex(k);
     return 0;
 }

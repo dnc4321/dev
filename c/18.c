@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 
 int main(void){
     printf("Enter Numbers\nEnter 0 to stop\n");
